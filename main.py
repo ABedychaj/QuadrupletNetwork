@@ -15,12 +15,14 @@ device = find_device()
 
 logger.info("Using device: \"{}\"".format(device))
 
+# prepare dataset
 ds_train = CIFAR100_Full("/tmp/cf100", transform=to_tensor, target_transform=None, download=True)
 ds_val = CIFAR100_Full("/tmp/cf100", transform=to_tensor, target_transform=None, download=True)
 
 prepare_cifar(ds_train, 50, True)
 prepare_cifar(ds_val, 50, False)
 
+# prepare embedding model
 resnet18 = models.resnet18(pretrained=False)
 resnet18.fc = nn.Identity()
 
